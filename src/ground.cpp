@@ -15,7 +15,7 @@ Ground::Ground()
 void Ground::Draw()
 {
     for (int i = 0; i < 3; i++)
-        gfx_Sprite(ground_0, x[i], Y);
+        gfx_Sprite(ground_0, x[i], GROUND_Y);
 }
 
 void Ground::Move()

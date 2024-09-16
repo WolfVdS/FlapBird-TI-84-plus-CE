@@ -4,12 +4,12 @@
 #include <tice.h>
 
 //Defines.
-#define SCROLL_SPEED 2
-#define VERTICAL_SPACE_BETWEEN_PIPES 96
-#define MIN_PIPE_VISIBILITY -pipe_height + 40
-#define MAX_PIPE_VISIBILITY -VERTICAL_SPACE_BETWEEN_PIPES - 40
+const int SCROLL_SPEED {2};
+const int VERTICAL_SPACE_BETWEEN_PIPES {96};
+const int MIN_PIPE_VISIBILITY {-pipe_height + 40};
+const int MAX_PIPE_VISIBILITY {-VERTICAL_SPACE_BETWEEN_PIPES - 40};
 //The amount of pipes on screen at 1 point in time.
-#define PIPE_AMOUNT 2
+const int PIPE_AMOUNT {2};
 
 class PipePair
 {

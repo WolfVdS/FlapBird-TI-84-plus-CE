@@ -5,9 +5,9 @@
 
 //Defines.
 //The Y-Coordinat to draw the ground at.
-#define Y LCD_HEIGHT - ground_0_height
+const int GROUND_Y {LCD_HEIGHT - ground_0_height};
 //The higher this value, the faster the ground animates.
-#define GROUND_ANIMATION_SPEED 2
+const int GROUND_ANIMATION_SPEED {2};
 
 class Ground
 {

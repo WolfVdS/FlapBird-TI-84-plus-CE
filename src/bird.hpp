@@ -8,15 +8,15 @@
 
 //Defines.
 //The speed at wich the bird switches animation keyframes, higher numbers result in slower animations, as a keyframe is shown for longer.
-#define BIRD_ANIMATION_SPEED 5
+const int BIRD_ANIMATION_SPEED {5};
 //The amount of pixels the bird will fall down when not affected by other forces everytime the Move() function is called.
-#define GRAVITY 5
+const int GRAVITY {5};
 //The velocity that is added everytime the Bird jumps.
-#define JUMP_VELOCITY -14
+const int JUMP_VELOCITY {14};
 //The amount of jump velocity that the bird loses when not jumping.
-#define JUMP_VELOCITY_DECREASE -1
+const int JUMP_VELOCITY_DECREASE {-1};
 //How fast the bird moves when idle.
-#define BIRD_IDLE_MOVE_SPEED 0.5;
+const double BIRD_IDLE_MOVE_SPEED {0.5};
 
 class Bird
 {

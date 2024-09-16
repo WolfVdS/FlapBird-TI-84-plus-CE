@@ -16,8 +16,8 @@
 #include <stdio.h>
 
 //Defines.
-#define TEXT_SCALE 3
-#define UNSCALED_TEXT_HEIGHT 8
+const int TEXT_SCALE {3};
+const int UNSCALED_TEXT_HEIGHT {8};
 
 void Begin();
 void End();
