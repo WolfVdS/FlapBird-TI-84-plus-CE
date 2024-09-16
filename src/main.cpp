@@ -1,9 +1,9 @@
 /*
  *--------------------------------------
- * Program Name:
- * Author:
- * License:
- * Description:
+ * Program Name: FlapBird
+ * Author: WolfVdS
+ * License: BSD 3-Clause
+ * Description: A FlappyBird-type game for the TI-84 plus CE calculator.
  *--------------------------------------
 */
 #include <keypadc.h>

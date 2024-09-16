@@ -3,7 +3,7 @@
 # ----------------------------
 
 NAME = FlapBird
-DESCRIPTION = ""
+DESCRIPTION = "A FlappyBird-type game for the TI-84 plus CE calculator."
 COMPRESSED = YES
 ARCHIVED = NO
 
