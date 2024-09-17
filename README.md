@@ -1,10 +1,11 @@
 # FlapBird-TI-84-plus-CE
 FlapBird is a FlappyBird-type game made from scratch for the TI-84 plus CE calculator using the CE development toolchain.
-I made this project when i was 16 years old as my first c++ project, but I have updated a little since.
+I made this project when i was 16 years old as my first c++ project, but I have updated it a little since.
 
 # Gameplay
 ![FlapBirdGameplay3](https://github.com/user-attachments/assets/3de75d2a-c5ba-454e-9552-d050f37666ea)
-FlapBird jumps up using the up-arrow key. To try again after hitting a pipe, use the 2nd key. To stop the game, simply press he del key.
+
+FlapBird jumps up using the up-arrow key. To try again after hitting a pipe, use the 2nd key. To stop the game, simply press the del key.
 
 # How to play
 You can download the newest release in the releases tab (on the right side of this github page).
