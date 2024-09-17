@@ -9,6 +9,9 @@
 const int TEXT_SCALE {3};
 const int UNSCALED_TEXT_HEIGHT {8};
 const int SCORE_STRING_SIZE {6};
+//The amount of extra pixels in width for the buffer that stores the background behind the score.
+//This is needed to stop artifacts from appearing
+const int BEHIND_SCORE_PADDING {8};
 
 class ScoreCounter
 {

@@ -1,8 +1,8 @@
 #ifndef GROUND
 #define GROUND
 
-#include <graphx.h>
 #include "gfx/gfx.h"
+#include <graphx.h>
 #include <tice.h>
 
 //Defines.

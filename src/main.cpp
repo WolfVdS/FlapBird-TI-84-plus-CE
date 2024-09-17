@@ -203,8 +203,14 @@ void Reset()
     srand(rtc_Time());
 
     gfx_SetDrawScreen();
+    bird->Cleanup();
+    for (int i = 0; i < PIPE_AMOUNT; i++)
+        pipes[i]->Cleanup();
     score->Cleanup();
     gfx_SetDrawBuffer();
+    bird->Cleanup();
+    for (int i = 0; i < PIPE_AMOUNT; i++)
+        pipes[i]->Cleanup();
     score->Cleanup();
 
     bird->Reset();

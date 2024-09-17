@@ -1,13 +1,13 @@
 #ifndef BIRD
 #define BIRD
 
-#include <graphx.h>
 #include "gfx/gfx.h"
-#include <keypadc.h>
 #include "math.hpp"
 #include "pipepair.hpp"
-#include <tice.h>
 #include "scorecounter.hpp"
+#include <graphx.h>
+#include <keypadc.h>
+#include <tice.h>
 
 //Defines.
 //The speed at wich the bird switches animation keyframes, higher numbers result in slower animations, as a keyframe is shown for longer.

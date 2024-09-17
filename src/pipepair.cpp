@@ -27,12 +27,6 @@ PipePair::PipePair(int upperx, int uppery)
 
 void PipePair::PreDraw()
 {
-    //Free the memory and allocate new memory.
-    free(behindUpper);
-    behindUpper = gfx_MallocSprite(pipe_width, LCD_HEIGHT + oldUppery);
-    free(behindLower);
-    behindLower = gfx_MallocSprite(pipe_width, LCD_HEIGHT - oldLowery);
-
     //Get the background behind the pipes' new position.
     gfx_GetSprite(behindUpper, oldUpperx, 0);
     gfx_GetSprite(behindLower, oldLowerx, oldLowery);
@@ -65,6 +59,13 @@ void PipePair::Move()
     {
         upperx = LCD_WIDTH;
         uppery = randInt(MIN_PIPE_VISIBILITY, MAX_PIPE_VISIBILITY);
+        lowery = uppery + VERTICAL_SPACE_BETWEEN_PIPES + pipe_height;
+
+        //Free the memory and allocate new memory.
+        free(behindUpper);
+        behindUpper = gfx_MallocSprite(pipe_width, LCD_HEIGHT + uppery);
+        free(behindLower);
+        behindLower = gfx_MallocSprite(pipe_width, LCD_HEIGHT - lowery);
     }
     else
     {
@@ -72,7 +73,6 @@ void PipePair::Move()
     }
         
     lowerx = upperx;
-    lowery = uppery + VERTICAL_SPACE_BETWEEN_PIPES + pipe_height;
 }
 
 void PipePair::Reset()
@@ -81,4 +81,10 @@ void PipePair::Reset()
     uppery = randInt(MIN_PIPE_VISIBILITY, MAX_PIPE_VISIBILITY);
     lowerx = originalUpperx;
     lowery = uppery + VERTICAL_SPACE_BETWEEN_PIPES + pipe_height;
+
+    //Free the memory and allocate new memory.
+    free(behindUpper);
+    behindUpper = gfx_MallocSprite(pipe_width, LCD_HEIGHT + uppery);
+    free(behindLower);
+    behindLower = gfx_MallocSprite(pipe_width, LCD_HEIGHT - lowery);
 }

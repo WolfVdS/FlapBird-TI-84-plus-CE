@@ -31,8 +31,6 @@ Bird::Bird(int x, int y)
 
 void Bird::PreDraw()
 {
-    free(behindBird);
-    behindBird = gfx_MallocSprite(bird_0_width, bird_0_height);
     //Get the background behind the sprite's old position.
     gfx_GetSprite(behindBird, oldx, oldy);
 }
