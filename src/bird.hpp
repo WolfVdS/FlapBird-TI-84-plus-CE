@@ -7,6 +7,7 @@
 #include "math.hpp"
 #include "pipepair.hpp"
 #include <tice.h>
+#include "scorecounter.hpp"
 
 //Defines.
 //The speed at wich the bird switches animation keyframes, higher numbers result in slower animations, as a keyframe is shown for longer.
@@ -31,8 +32,6 @@ class Bird
     gfx_rletsprite_t* currentSprite;
     //This indicates if the Bird has hit a pipe.
     bool hitPipe;
-    //The score of the bird, this indicates how many pipes the bird has passed trough.
-    int score;
 
     //Constructor.
     Bird(int x, int y);
@@ -50,7 +49,7 @@ class Bird
     //This method returns true when the bird is alive.
     bool IsAlive();
     //This method handles the pipes, it checks if the bird has hit a pipe and if it has passed one.
-    void HandlePipes(PipePair** pipes);
+    void HandlePipes(PipePair** pipes, ScoreCounter* score);
     //Resets the bird to it's original state.
     void Reset();
 

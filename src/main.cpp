@@ -6,43 +6,34 @@
  * Description: A FlappyBird-type game for the TI-84 plus CE calculator.
  *--------------------------------------
 */
-#include <keypadc.h>
-#include <graphx.h>
+
 #include "gfx/gfx.h"
 #include "bird.hpp"
 #include "pipepair.hpp"
 #include "ground.hpp"
+#include "scorecounter.hpp"
 #include <tice.h>
 #include <stdio.h>
-
-//Defines.
-const int TEXT_SCALE {3};
-const int UNSCALED_TEXT_HEIGHT {8};
+#include <keypadc.h>
+#include <graphx.h>
 
 void Initialize();
 void End();
 void Gameplay();
 void Draw();
 void DrawBackground();
-void PreDrawScore();
-void DrawScore();
-void CleanupScore();
 void Reset();
 
 Bird* bird;
 PipePair* pipes[PIPE_AMOUNT];
 Ground* ground;
+ScoreCounter* score;
 //This bool indicates if the game has started with a round.
 bool started = false;
-//Buffer to hold the score as a string.
-char scorestring[6] = "0";
-//Buffer to hold background behind the score.
-gfx_sprite_t* behindScore = gfx_MallocSprite(gfx_GetStringWidth(scorestring) + 8, UNSCALED_TEXT_HEIGHT * TEXT_SCALE);;
 
 int main(void)
 {
     Initialize();
-
     //While the del key isn't pressed.
     while (!(kb_Data[1] & kb_Del))
     {
@@ -119,6 +110,9 @@ void Initialize()
     //Initialize the ground.
     ground = new Ground();
 
+    //Initialize the score.
+    score = new ScoreCounter();
+
     //Scan the keyboard for new input.
     kb_Scan();
 }
@@ -129,6 +123,7 @@ void End()
     for (int i = 0; i < PIPE_AMOUNT; i++)
         delete &pipes[i];
     delete ground;
+    delete score;
     gfx_End();
 }
 
@@ -136,7 +131,7 @@ void Gameplay()
 {   
     //If a round has started we will begin handling the pipes(checking for collisions hand scoring).
     if(started)
-        bird->HandlePipes(pipes);
+        bird->HandlePipes(pipes, score);
 
     if (bird->IsAlive())
     {
@@ -166,7 +161,7 @@ void Draw()
     for (int i = 0; i < PIPE_AMOUNT; i++)
         pipes[i]->PreDraw();
     bird->PreDraw();
-    PreDrawScore();
+    score->PreDraw();
     
     //Draw the pipes.
     for (int i = 0; i < PIPE_AMOUNT; i++)
@@ -183,14 +178,14 @@ void Draw()
 
     //If the round has started, print the score on the screen.
     if (started)
-        DrawScore();
+        score->Draw();
     
     //Swap the buffer and the screen to show the results on screen.
     gfx_SwapDraw();
-
+    
     //Clean up the buffer so it can be re-used.
     if(started)
-        CleanupScore();
+        score->Cleanup();
     bird->Cleanup();
     for (int i = 0; i < PIPE_AMOUNT; i++)
         pipes[i]->Cleanup();
@@ -202,37 +197,20 @@ void DrawBackground()
     gfx_Sprite_NoClip(background_1, background_0_width, 0);
 }
 
-void PreDrawScore()
-{
-    free(behindScore);
-    behindScore = gfx_MallocSprite(gfx_GetStringWidth(scorestring) + 8, UNSCALED_TEXT_HEIGHT * TEXT_SCALE);
-    gfx_GetSprite_NoClip(behindScore, (LCD_WIDTH - gfx_GetStringWidth(scorestring)) / 2 - 4, LCD_HEIGHT / 6);
-}
-
-void DrawScore()
-{
-    sprintf(scorestring, "%u", bird->score);
-    gfx_PrintStringXY(scorestring, (LCD_WIDTH - gfx_GetStringWidth(scorestring)) / 2, LCD_HEIGHT / 6);
-}
-
-void CleanupScore()
-{
-    gfx_Sprite_NoClip(behindScore, (LCD_WIDTH - gfx_GetStringWidth(scorestring)) / 2 - 4, LCD_HEIGHT / 6);
-}
-
 void Reset()
 {
     started = false;
     srand(rtc_Time());
 
     gfx_SetDrawScreen();
-    CleanupScore();
+    score->Cleanup();
     gfx_SetDrawBuffer();
-    CleanupScore();
+    score->Cleanup();
 
     bird->Reset();
     for (int i = 0; i < PIPE_AMOUNT; i++)
         pipes[i]->Reset();
+    score->Reset();
 }
 
 

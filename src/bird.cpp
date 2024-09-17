@@ -11,7 +11,6 @@ Bird::Bird(int x, int y)
     originaly = y;
 
     hitPipe = false;
-    score = 0;
     scored = false;
 
     //Create and assign the RLE sprites.
@@ -32,6 +31,8 @@ Bird::Bird(int x, int y)
 
 void Bird::PreDraw()
 {
+    free(behindBird);
+    behindBird = gfx_MallocSprite(bird_0_width, bird_0_height);
     //Get the background behind the sprite's old position.
     gfx_GetSprite(behindBird, oldx, oldy);
 }
@@ -104,7 +105,7 @@ bool Bird::IsAlive()
         return true;
 }
 
-void Bird::HandlePipes(PipePair** pipes)
+void Bird::HandlePipes(PipePair** pipes, ScoreCounter* score)
 {
     //If we have already hit a pipe, we won't check another time.
     if (hitPipe)
@@ -129,7 +130,7 @@ void Bird::HandlePipes(PipePair** pipes)
         if ((x >= pipes[i]->upperx) && (x <= pipes[i]->upperx + pipe_width) && (!scored))
         {
             scored = true;
-            score++;
+            score->IncreaseScore();
         }
 
         //If we have scored recently and we aren't in between the pipes anymore, we'll we able to score again.
@@ -146,7 +147,6 @@ void Bird::Reset()
     vy = 0;
     currentSprite = bird_1_rle;
     hitPipe = false;
-    score = 0;
     scored = false;
     Jump();
 }
