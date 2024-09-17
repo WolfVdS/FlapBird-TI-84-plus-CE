@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PIPEPAIR
+#define PIPEPAIR
+
 #include <graphx.h>
 #include "gfx/gfx.h"
 #include <tice.h>
@@ -15,13 +17,13 @@ class PipePair
 {
     public:
     //The position of the upperPipe.
-    int upperx = 0, uppery = 0;
+    int upperx, uppery;
     //The position of the lowerPipe.
-    int lowerx = 0, lowery = 0;
+    int lowerx, lowery;
     
     //The sprites of the pipes.
-    gfx_rletsprite_t* upperSprite = nullptr;
-    gfx_rletsprite_t* lowerSprite = nullptr;
+    static gfx_rletsprite_t* upperSprite;
+    static gfx_rletsprite_t* lowerSprite;
 
     //Constructor.
     PipePair(int upperx, int uppery);
@@ -39,11 +41,13 @@ class PipePair
 
     private:
     //The sprites that contain the background behind the pipes from the previous frame.
-    gfx_sprite_t* behindUpper = nullptr;
-    gfx_sprite_t* behindLower = nullptr;
+    gfx_sprite_t* behindUpper;
+    gfx_sprite_t* behindLower;
     //The previous frame's position of the pipes.
-    int oldUpperx = 0, oldUppery = 0;
-    int oldLowerx = 0, oldLowery = 0;
+    int oldUpperx, oldUppery;
+    int oldLowerx, oldLowery;
     //The original x-coordinate the upperpipe was instantiated with.
-    int originalUpperx = 0;
+    int originalUpperx;
 };
+
+#endif

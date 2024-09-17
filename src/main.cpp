@@ -19,7 +19,7 @@
 const int TEXT_SCALE {3};
 const int UNSCALED_TEXT_HEIGHT {8};
 
-void Begin();
+void Initialize();
 void End();
 void Gameplay();
 void Draw();
@@ -41,7 +41,7 @@ gfx_sprite_t* behindScore = gfx_MallocSprite(gfx_GetStringWidth(scorestring) + 8
 
 int main(void)
 {
-    Begin();
+    Initialize();
 
     //While the del key isn't pressed.
     while (!(kb_Data[1] & kb_Del))
@@ -63,7 +63,7 @@ int main(void)
     return 0;
 }
 
-void Begin()
+void Initialize()
 {
     //Initialize the graphics.
     gfx_Begin();
@@ -94,14 +94,29 @@ void Begin()
     //Set the random seed based off the real time clock.
     srand(rtc_Time());
 
-    //Initialize the Bird, the pipes and the ground.
+    //Initialize the Bird.
     bird = new Bird((LCD_WIDTH / 2) - bird_0_width, (LCD_HEIGHT - bird_0_height) / 2);
+
+    //Initialize the pipes.
+    //Because the upper and lower sprites are shared beatween each PipePair they are static 
+    //to save memory and stop the program from crashing.
+    //Because they are static they cant be assigned via the constructor.
+    //And because the transparent color must be set first they can also not be assigned in the pipepair.cpp file,
+    //and thus they need to be assigned here.
+    gfx_sprite_t* temp = gfx_MallocSprite(pipe_width, pipe_height);
+    gfx_RotateSpriteHalf(pipe, temp);
+    PipePair::upperSprite = gfx_ConvertMallocRLETSprite(pipe);
+    PipePair::lowerSprite = gfx_ConvertMallocRLETSprite(temp);
+    free(temp);
+
     for (int i = 0; i < PIPE_AMOUNT; i++)
     {
         int x = ((i + 1) * (LCD_WIDTH / 2)) - ((PIPE_AMOUNT - i) * (pipe_width / 2)) + LCD_WIDTH;
         int y = randInt(MIN_PIPE_VISIBILITY, MAX_PIPE_VISIBILITY);
         pipes[i] = new PipePair(x, y);
     }
+
+    //Initialize the ground.
     ground = new Ground();
 
     //Scan the keyboard for new input.
@@ -112,7 +127,7 @@ void End()
 {
     delete bird;
     for (int i = 0; i < PIPE_AMOUNT; i++)
-        delete pipes[i];
+        delete &pipes[i];
     delete ground;
     gfx_End();
 }

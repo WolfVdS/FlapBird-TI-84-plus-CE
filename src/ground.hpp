@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GROUND
+#define GROUND
+
 #include <graphx.h>
 #include "gfx/gfx.h"
 #include <tice.h>
@@ -22,5 +24,7 @@ class Ground
 
     private:
     //The x-coordinates of the ground parts.
-    int x[3] = {0, ground_0_width, ground_0_width * 2};
+    int x[3];
 };
+
+#endif

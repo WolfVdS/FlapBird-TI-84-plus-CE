@@ -1,5 +1,9 @@
 #include "pipepair.hpp"
 
+//Initialize the static variables.
+gfx_rletsprite_t* PipePair::upperSprite = nullptr;
+gfx_rletsprite_t* PipePair::lowerSprite = nullptr;
+
 PipePair::PipePair(int upperx, int uppery)
 {
     this->upperx = upperx;
@@ -11,12 +15,6 @@ PipePair::PipePair(int upperx, int uppery)
     oldLowerx = this->lowerx;
     oldLowery = this->lowery;
     originalUpperx = this->upperx;
-
-    //Create and assign the RLE sprites.
-    gfx_sprite_t* temp = pipe;
-    gfx_RotateSpriteHalf(pipe, temp);
-    upperSprite = gfx_ConvertMallocRLETSprite(pipe);
-    lowerSprite = gfx_ConvertMallocRLETSprite(temp);
 
     //Create the sprites that will hold the background.
     behindUpper = gfx_MallocSprite(pipe_width, LCD_HEIGHT + uppery);

@@ -4,10 +4,15 @@ Bird::Bird(int x, int y)
 {
     this->x = x;
     this->y = y;
+    vy = 0;
     oldx = x;
     oldy = y;
     originalx = x;
     originaly = y;
+
+    hitPipe = false;
+    score = 0;
+    scored = false;
 
     //Create and assign the RLE sprites.
     bird_0_rle = gfx_ConvertMallocRLETSprite(bird_0);

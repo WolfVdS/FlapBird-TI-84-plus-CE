@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BIRD
+#define BIRD
+
 #include <graphx.h>
 #include "gfx/gfx.h"
 #include <keypadc.h>
@@ -12,7 +14,7 @@ const int BIRD_ANIMATION_SPEED {5};
 //The amount of pixels the bird will fall down when not affected by other forces everytime the Move() function is called.
 const int GRAVITY {5};
 //The velocity that is added everytime the Bird jumps.
-const int JUMP_VELOCITY {14};
+const int JUMP_VELOCITY {-14};
 //The amount of jump velocity that the bird loses when not jumping.
 const int JUMP_VELOCITY_DECREASE {-1};
 //How fast the bird moves when idle.
@@ -22,15 +24,15 @@ class Bird
 {
     public:
     //The position variables of the bird.
-    int x = 0, y = 0;
+    int x, y;
     //The velocity of the Bird on the y-axis.
-    int vy = 0;
+    int vy;
     //The sprite that is currently used to render the bird.
-    gfx_rletsprite_t* currentSprite = nullptr;
+    gfx_rletsprite_t* currentSprite;
     //This indicates if the Bird has hit a pipe.
-    bool hitPipe = false;
+    bool hitPipe;
     //The score of the bird, this indicates how many pipes the bird has passed trough.
-    int score = 0;
+    int score;
 
     //Constructor.
     Bird(int x, int y);
@@ -54,18 +56,20 @@ class Bird
 
     private:
     //The rle sprites that are used for animation.
-    gfx_rletsprite_t* bird_0_rle = nullptr;
-    gfx_rletsprite_t* bird_1_rle = nullptr;
-    gfx_rletsprite_t* bird_2_rle = nullptr;
+    gfx_rletsprite_t* bird_0_rle;
+    gfx_rletsprite_t* bird_1_rle;
+    gfx_rletsprite_t* bird_2_rle;
     //The sprite that conatins the background behind the bird from the previous frame.
-    gfx_sprite_t* behindBird = nullptr;
+    gfx_sprite_t* behindBird;
     //The previous frame's position of the bird.
-    int oldx = 0, oldy = 0;
+    int oldx, oldy;
     //The original position variables the bird was instantiated with.
-    int originalx = 0, originaly = 0;
+    int originalx, originaly;
     //This indicates if the bird has recently scored.
-    bool scored = false;
+    bool scored;
     gfx_rletsprite_t* GetSpriteToDraw();
     void Jump();
     void DecreaseJumpVelocity();
 };
+
+#endif
