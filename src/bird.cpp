@@ -12,12 +12,8 @@ Bird::Bird(int x, int y)
 
     hitPipe = false;
     scored = false;
-
-    //Create and assign the RLE sprites.
-    bird_0_rle = gfx_ConvertMallocRLETSprite(bird_0);
-    bird_1_rle = gfx_ConvertMallocRLETSprite(bird_1);
-    bird_2_rle = gfx_ConvertMallocRLETSprite(bird_2);
-    currentSprite = bird_1_rle;
+    
+    currentSprite = bird_1;
 
     //Create the sprite that will hold the background.
     behindBird = gfx_MallocSprite(bird_0_width, bird_0_height);
@@ -143,7 +139,7 @@ void Bird::Reset()
     x = originalx;
     y = originaly;
     vy = 0;
-    currentSprite = bird_1_rle;
+    currentSprite = bird_1;
     hitPipe = false;
     scored = false;
     Jump();
@@ -153,7 +149,7 @@ gfx_rletsprite_t* Bird::GetSpriteToDraw()
 {
     //If the bird is dead or it has hit a pipe, it won't animate anymore.
     if (!IsAlive() || hitPipe)
-        return bird_1_rle;
+        return bird_1;
     
     static int spriteIndex = 0;
     //Increase the spriteIndex everytime this method is ran.
@@ -166,13 +162,13 @@ gfx_rletsprite_t* Bird::GetSpriteToDraw()
 
         //If we divide spriteIndex by BIRD_ANIMATION_SPEED we get the number of times we have entered this if clause.
         if (relativeSpriteIndex % 2 == 0)
-            return bird_1_rle;
+            return bird_1;
 
         else if(relativeSpriteIndex % 3 == 0)
-            return bird_2_rle;
+            return bird_2;
 
         else if(relativeSpriteIndex % 1 == 0)
-            return bird_0_rle;
+            return bird_0;
 
         else
             return currentSprite;

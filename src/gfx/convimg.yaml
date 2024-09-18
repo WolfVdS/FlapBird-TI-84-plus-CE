@@ -9,15 +9,29 @@ palettes:
 converts:
   - name: sprites
     palette: global_palette
-    transparent-color-index: 0
+    transparent-color-index: 1
     images:
-      - pipe.png
       - background_0.png
       - background_1.png
       - ground_0.png
+
+  - name: spritesRLET
+    palette: global_palette
+    transparent-color-index: 1
+    style: rlet
+    images:
+      - pipe.png
       - bird_0.png
       - bird_1.png
       - bird_2.png
+
+  - name: spritesflippedRLET
+    palette: global_palette
+    transparent-color-index: 1
+    style: rlet
+    flip-x: true
+    images:
+      - pipe_flipped.png
 
 outputs:
   - type: c
@@ -26,3 +40,5 @@ outputs:
       - global_palette
     converts:
       - sprites
+      - spritesRLET
+      - spritesflippedRLET

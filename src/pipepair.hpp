@@ -20,10 +20,6 @@ class PipePair
     int upperx, uppery;
     //The position of the lowerPipe.
     int lowerx, lowery;
-    
-    //The sprites of the pipes.
-    static gfx_rletsprite_t* upperSprite;
-    static gfx_rletsprite_t* lowerSprite;
 
     //Constructor.
     PipePair(int upperx, int uppery);

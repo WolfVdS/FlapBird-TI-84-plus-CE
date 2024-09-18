@@ -1,9 +1,5 @@
 #include "pipepair.hpp"
 
-//Initialize the static variables.
-gfx_rletsprite_t* PipePair::upperSprite = nullptr;
-gfx_rletsprite_t* PipePair::lowerSprite = nullptr;
-
 PipePair::PipePair(int upperx, int uppery)
 {
     this->upperx = upperx;
@@ -35,8 +31,8 @@ void PipePair::PreDraw()
 void PipePair::Draw()
 {
     //Draw the sprites.
-    gfx_RLETSprite(upperSprite, upperx, uppery);
-    gfx_RLETSprite(lowerSprite, lowerx, lowery);
+    gfx_RLETSprite(pipe, upperx, uppery);
+    gfx_RLETSprite(pipe_flipped, lowerx, lowery);
 }
 
 void PipePair::Cleanup()

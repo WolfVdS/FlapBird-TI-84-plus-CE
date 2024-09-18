@@ -54,10 +54,6 @@ class Bird
     void Reset();
 
     private:
-    //The rle sprites that are used for animation.
-    gfx_rletsprite_t* bird_0_rle;
-    gfx_rletsprite_t* bird_1_rle;
-    gfx_rletsprite_t* bird_2_rle;
     //The sprite that conatins the background behind the bird from the previous frame.
     gfx_sprite_t* behindBird;
     //The previous frame's position of the bird.

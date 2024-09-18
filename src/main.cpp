@@ -88,18 +88,6 @@ void Initialize()
     //Initialize the Bird.
     bird = new Bird((LCD_WIDTH / 2) - bird_0_width, (LCD_HEIGHT - bird_0_height) / 2);
 
-    //Initialize the pipes.
-    //Because the upper and lower sprites are shared beatween each PipePair they are static 
-    //to save memory and stop the program from crashing.
-    //Because they are static they cant be assigned via the constructor.
-    //And because the transparent color must be set first they can also not be assigned in the pipepair.cpp file,
-    //and thus they need to be assigned here.
-    gfx_sprite_t* temp = gfx_MallocSprite(pipe_width, pipe_height);
-    gfx_RotateSpriteHalf(pipe, temp);
-    PipePair::upperSprite = gfx_ConvertMallocRLETSprite(pipe);
-    PipePair::lowerSprite = gfx_ConvertMallocRLETSprite(temp);
-    free(temp);
-
     for (int i = 0; i < PIPE_AMOUNT; i++)
     {
         int x = ((i + 1) * (LCD_WIDTH / 2)) - ((PIPE_AMOUNT - i) * (pipe_width / 2)) + LCD_WIDTH;
